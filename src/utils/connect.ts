@@ -4,7 +4,7 @@ require('dotenv').config();
 
 async function connect() {
   const DB_URI: string = process.env.DB_URI;
-  // Or:
+
   try {
     await mongoose.connect(DB_URI);
     logger.info(
