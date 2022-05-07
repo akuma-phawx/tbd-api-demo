@@ -5,6 +5,9 @@
   "repository": "git@github.com:akuma-phawx/tbd-api-demo.git",
   "author": "Christoforos Vradis <chrisvradis00@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts"
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "config": "^3.3.7",
