@@ -1,14 +1,16 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 require('dotenv').config();
-
-export interface UserDocument extends mongoose.Document {
+export interface UserInput {
   email: string;
   name: string;
   password: string;
+}
+
+export interface UserDocument extends UserInput, mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
-  comparePassword(candidatePassword: string): Promise<boolean>;
+  comparePassword(candidatePassword: string): Promise<Boolean>;
 }
 
 const userSchema = new mongoose.Schema(
@@ -29,7 +31,7 @@ userSchema.pre('save', async function (next) {
     return next();
   }
 
-  const SWF: number = parseInt(process.env.SALT_WORK_FACTOR);
+  const SWF = parseInt(process.env.SALT_WORK_FACTOR);
   const salt = await bcrypt.genSalt(SWF);
 
   const hash = await bcrypt.hashSync(user.password, salt);
@@ -39,12 +41,14 @@ userSchema.pre('save', async function (next) {
   return next();
 });
 
-userSchema.methods.comparePassword ==
-  async function (candidatePassword: string): Promise<boolean> {
-    const user = this as UserDocument;
-    return bcrypt.compare(candidatePassword, user.password).catch((e) => false);
-  };
+userSchema.methods.comparePassword = async function (
+  candidatePassword: string
+): Promise<boolean> {
+  const user = this as UserDocument;
 
-const UserModel = mongoose.model('User', userSchema);
+  return bcrypt.compare(candidatePassword, user.password).catch((e) => false);
+};
+
+const UserModel = mongoose.model<UserDocument>('User', userSchema);
 
 export default UserModel;

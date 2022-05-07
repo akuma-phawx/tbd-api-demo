@@ -8,6 +8,8 @@ require('dotenv').config();
 const app = express();
 const PORT: number = parseInt(process.env.SERVER_PORT);
 
+app.use(express.json());
+
 app.listen(PORT, async () => {
   logger.info(`Server Up: http://${process.env.SERVER_URI}:${PORT}`);
 
