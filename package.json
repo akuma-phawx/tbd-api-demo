@@ -6,7 +6,8 @@
   "author": "Christoforos Vradis <chrisvradis00@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/app.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "start": "node src/app.ts"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
