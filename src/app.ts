@@ -6,7 +6,7 @@ import routes from './routes';
 require('dotenv').config();
 
 const app = express();
-const PORT = parseInt(process.env.PORT) || 8080;
+const PORT: number = parseInt(process.env.PORT!) || 8080;
 
 app.use(express.json());
 

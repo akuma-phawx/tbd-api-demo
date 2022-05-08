@@ -31,7 +31,7 @@ userSchema.pre('save', async function (next) {
     return next();
   }
 
-  const SWF: number = parseInt(process.env.SALT_WORK_FACTOR) || -1;
+  const SWF: number = parseInt(process.env.SALT_WORK_FACTOR!) || -1;
   const salt = await bcrypt.genSalt(SWF);
 
   const hash = await bcrypt.hashSync(user.password, salt);
