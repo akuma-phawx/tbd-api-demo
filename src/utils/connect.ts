@@ -3,7 +3,7 @@ import logger from './logger';
 require('dotenv').config();
 
 async function connect() {
-  const DB_URI: string = process.env.DB_URI;
+  const DB_URI: string = process.env.DB_URI || '';
 
   try {
     await mongoose.connect(DB_URI);
